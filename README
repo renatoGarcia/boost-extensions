@@ -8,6 +8,9 @@ There are three extensions to the Boost Property Tree library:
 * Lua parser
 * Python API
 
+This code is part of another library called Golld, but complete and useful for
+itself. Because of that, the namespace used in this code is golld.
+
 
 Assign
 ------
@@ -90,8 +93,8 @@ Python API
 ----------
 
 This extension is a Python wrapper in the Boost Property Tree library. Its
-intent is easily the exposing to Python of C++ code using the Boost Property Tree
-library.
+intent is easily the exposing to Python of C++ code using the Boost Property
+Tree library.
 
 If you is using the SWIG to expose your classes, the ptree.i module will make
 transparent the Python -> C++ ptree translation. To this, only include a
