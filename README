@@ -96,6 +96,16 @@ This extension is a Python wrapper in the Boost Property Tree library. Its
 intent is easily the exposing to Python of C++ code using the Boost Property
 Tree library.
 
-If you is using the SWIG to expose your classes, the ptree.i module will make
-transparent the Python -> C++ ptree translation. To this, only include a
-%include "ptree.i" in your .i file.
+If you is using the SWIG to expose your classes, the ptree.i module will make transparent
+the Python -> C++ ptree translation. To this, only include a %include "ptree.i" in your .i
+file. Else, the binding code don't uses the SWIG anyway and a ptree can be created and
+used in Python just as:
+
+    pt1 = (tree()
+             ('key1', 1)
+             ('key2', 2)
+             ('subtree', tree()(1)(2)(3))
+         ).ptree
+    pt2 = read_json('tree.json')
+    pt1.add('aaa', 'bbb')
+    print pt1
