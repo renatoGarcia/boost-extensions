@@ -1,0 +1,18 @@
+{
+    "prop" : "property 1",
+    "um" : 1,
+    "boolvalue" : true,
+
+    "subtree" :
+    {
+        "tree" : "ipe",
+        "tree" : "oak",
+
+        "fruit" :
+        [
+            "mango",
+            "pear",
+            "olive"
+        ]
+    }
+}

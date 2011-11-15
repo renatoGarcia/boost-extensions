@@ -1,0 +1,21 @@
+;This is a comment
+
+trees
+{
+    prop "property 1"
+    one 1
+    boolvalue true
+
+    subtree
+    {
+        tree ipe
+        tree oak ;inline comment
+
+        fruit
+        {
+            "" mango
+            "" pear
+            "" olive
+        }
+    }
+}

@@ -1,0 +1,98 @@
+Boost Extensions
+================
+
+There are three extensions to the Boost Property Tree library:
+
+* Assign
+* Conversion
+* Lua parser
+* Python API
+
+
+Assign
+------
+
+This extension provides a more concise and elegant alternative to create a
+boost::property_tree::basic_ptree. For instance, a property_tree like:
+
+    key1 value1
+    key2
+    {
+        key3 12345
+        {
+            key4 "value4 with spaces"
+        }
+        key5 value5
+        "" 10
+        "" 11
+        "" 12
+    }
+
+Can be created:
+
+    ptree pt =
+        tree()
+        ("key1", "value1")
+        ("key2", tree()
+            ("key3", 12345)
+            (tree()
+                ("key4", "value4 with spaces"))
+            ("key5", "value5")
+            (10)(11)(12));
+
+That code is cleaner that:
+
+    ptree pt;
+    pt.add("key1", "value1");
+
+    ptree tmpPt1;
+    tmpPt1.add("key3", 12345);
+
+    ptree tmpPt2;
+    tmpPt2.add("key4", "value4 with spaces");
+
+    tmpPt1.push_back(std::make_pair("", tmpPt2));
+    tmpPt1.add("key5", "value5");
+
+    ptree tmpPt3;
+    tmpPt3.put_value(10);
+    tmpPt1.push_back(std::make_pair("", tmpPt3));
+
+    ptree tmpPt4;
+    tmpPt4.put_value(11);
+    tmpPt1.push_back(std::make_pair("", tmpPt4));
+
+    ptree tmpPt5;
+    tmpPt5.put_value(12);
+    tmpPt1.push_back(std::make_pair("", tmpPt5));
+
+    pt.add_child("key2", tmpPt1);
+
+
+Conversion
+----------
+
+This is only functions to convert a boost::ptree to a C++ sequence, a Boost
+Array, or build a ptree from the union of other two ptrees.
+
+
+Lua parser
+----------
+
+This is a Lua parser, as the XML or JSON parsers. It will run the Lua script
+whose name was passed to read_lua function, and will build a boost::ptree from a
+resulting Lua table.
+
+Or, it will output a Lua script from a boos::ptree.
+
+
+Python API
+----------
+
+This extension is a Python wrapper in the Boost Property Tree library. Its
+intent is easily the exposing to Python of C++ code using the Boost Property Tree
+library.
+
+If you is using the SWIG to expose your classes, the ptree.i module will make
+transparent the Python -> C++ ptree translation. To this, only include a
+%include "ptree.i" in your .i file.
